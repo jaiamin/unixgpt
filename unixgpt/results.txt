@@ -1,3 +1,0 @@
-def main():
-        default=DEFAULT_MODEL,
-def execute_unix_command(unix_command: str):
