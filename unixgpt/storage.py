@@ -1,0 +1,1 @@
+# store previous generated commands (locally) if executed/copied (don't if aborted)

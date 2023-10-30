@@ -1,4 +1,4 @@
-from clients.openai import OpenAIClient
+from models.openai import OpenAIClient
 from argparser import parse
 from utils import (
     execute_unix_command, 

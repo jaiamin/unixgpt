@@ -1,4 +1,4 @@
-from cli import cli
+import cli
 
 
 def main():
