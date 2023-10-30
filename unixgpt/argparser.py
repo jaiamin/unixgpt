@@ -5,7 +5,7 @@ from constants import (
     VERSION
 )
 
-def parse_arguments():
+def parse():
     parser = argparse.ArgumentParser(
         prog="unixgpt",
         description="Bridges the gap between natural language and UNIX commands"

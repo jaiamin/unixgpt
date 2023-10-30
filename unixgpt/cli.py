@@ -1,13 +1,12 @@
-
 from clients.openai import OpenAIClient
-from argparser import parse_arguments
+from argparser import parse
 from utils import (
     execute_unix_command, 
     copy_command_to_clipboard
 )
 
-def main():
-    args = parse_arguments()
+def cli():
+    args = parse()
 
     print("|")
     print("|--- Finding corresponding UNIX command...")
@@ -43,7 +42,3 @@ def main():
     else:
         print("|")
         print("|--- Execution aborted.")
-
-
-if __name__ == "__main__":
-    main()
