@@ -1,9 +1,7 @@
 import argparse
-from constants import (
-    DEFAULT_MODEL, 
-    SUPPORTED_MODELS,
-    VERSION
-)
+
+from constants import VERSION
+
 
 def parse():
     parser = argparse.ArgumentParser(
@@ -15,46 +13,36 @@ def parse():
     parser.add_argument(
         "-i", "--input",
         type=str,
-        required=True,
         help="Natural language input to be converted to unix command. Enclose in quotation marks."
     )
 
-    # model selection
+    # show saved commands in unixgpt local library
     parser.add_argument(
-        "-m", "--model",
+        "-l", "--list",
+        type="store_true",
+        help="List saved commands in UnixGPT local library"
+    )
+
+    # save command to unixgpt local library
+    parser.add_argument(
+        "-s", "--save",
         type=str,
-        default=DEFAULT_MODEL,
-        choices=SUPPORTED_MODELS,
-        help="Supported large language model to use"
+        help="Store a command in UnixGPT local library for easy access"
     )
 
-    # force output execution (CONSIDER REMOVING)
+    # fetch a command from unixgpt local library with natural language or by ID
     parser.add_argument(
-        "-f", "--force",
-        action="store_true",
-        help="Force execution of resulting UNIX command"
+        "-f", "--fetch",
+        type=str,
+        help="Fetch a command from UnixGPT local library with natural language or by ID"
     )
 
-    # development/feedback mode (CONSIDER REMOVING)
+    # delete a saved command from unixgpt local library by ID
     parser.add_argument(
-        "-d", "--dev",
-        action="store_true",
-        help="Submit input/output for model improvement"
+        "-d", "--delete",
+        type=str,
+        help="Delete a saved command from UnixGPT local library"
     )
-
-    # print mode
-    parser.add_argument(
-        "-c", "--copy",
-        action="store_true",
-        help="Copy resulting UNIX command to clipboard (does not execute)"
-    )
-
-    # # interactive mode
-    # parser.add_argument(
-    #     "--interactive",
-    #     action="store_true",
-    #     help="Continue the conversation to clarify input"
-    # )
 
     # unixgpt version
     parser.add_argument(
@@ -64,4 +52,5 @@ def parse():
         help="Print version information and quit"
     )
     
-    return parser.parse_args()
+    args = parser.parse_args()
+    return args

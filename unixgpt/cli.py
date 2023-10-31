@@ -11,8 +11,8 @@ def cli():
     print("|")
     print("|--- Finding corresponding UNIX command...")
     openai_client = OpenAIClient()
-    unix_command = openai_client.get_unix_command(
-        args.input, 
+    unix_command = openai_client.fetch_unix_command(
+        user_input=args.input, 
         model=args.model
     )
 
