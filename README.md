@@ -26,3 +26,53 @@ docker build -t unixgpt .
 ```bash
 docker run -e USER_INPUT="Your custom input" -e OPENAI_API_KEY="Your key here" unixgpt
 ```
+
+## Examples
+
+### Conversion
+
+```
+Input: unixgpt -i "I want to see any uses of the 'git commit' command in my history"
+
+Output: history | grep "git commit"
+```
+
+```
+Input: unixgpt -i "Use the Dockerfile in the cwd to create an image called project-image"
+
+Output: docker build -t project-image .
+```
+
+```
+Input: unixgpt --input "Show me the current processes running on port 8000"
+
+Output: lsof -i :8000
+```
+
+### Save
+
+```
+Input: unixgpt -s "git commit && git push"
+
+Output: "Added to UnixGPT local library"
+```
+
+```
+Input: unixgpt --save 1599
+
+Output: "Added to UnixGPT local library"
+```
+
+### Fetch
+
+```
+Input: unixgpt -f "command that commits and pushes via Git"
+
+Output: git commit && git push
+```
+
+```
+Input: unixgpt --fetch 23
+
+Output: "Returns command in UnixGPT local library with ID:23"
+```
