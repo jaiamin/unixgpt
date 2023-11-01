@@ -10,6 +10,12 @@ The latest version of ```unixgpt``` can be installed from PyPI:
 pip install unixgpt
 ```
 
+To upgrade to the latest version:
+
+```bash
+pip install --upgrade unixgpt
+```
+
 ## Features
 1. Conversion: Effortlessly convert natural language queries into the corresponding UNIX commands.
 
