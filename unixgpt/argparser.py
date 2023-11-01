@@ -19,7 +19,7 @@ def parse():
     # show saved commands in unixgpt local library
     parser.add_argument(
         "-l", "--list",
-        type="store_true",
+        action="store_true",
         help="List saved commands in UnixGPT local library"
     )
 

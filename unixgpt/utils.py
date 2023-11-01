@@ -1,17 +1,21 @@
 import subprocess
 import pyperclip
 
-def execute_unix_command(unix_command: str):
-    print("|")
+def execute_unix_command(unix_command: str) -> dict:
     try:
-        print("|--- Executing...")
         subprocess.run(unix_command, shell=True, check=True)
-    except subprocess.CalledProcessError as e:
-        print("|")
-        print("|--- Execution Error:", e)
+        return {"success": f"Command '{unix_command}' ran successfully."}
+    except subprocess.SubprocessError as e:
+        return {"error": f"Command '{unix_command}' failed to run."}
+    except Exception as e:
+        return {"error": f"An unexpected error occurred while executing."}
 
 
-def copy_command_to_clipboard(unix_command: str):
-    pyperclip.copy(unix_command)
-    print("|")
-    print("|--- Copied to clipboard.")
+def copy_command_to_clipboard(unix_command: str) -> dict:
+    try:
+        pyperclip.copy(unix_command)
+        return {"success": f"Command '{unix_command}' copied to clipboard successfully."}
+    except pyperclip.PyperclipException:
+        return {"error": f"Command '{unix_command}' was not able to be copied."} 
+    except Exception as e:
+        return {"error": f"An unexpected error occurred while copying."}
