@@ -12,6 +12,3 @@ setup(
         ]
     },
 )
-
-"""unixgpt -i "Create two directories in CWD: hello-world and test-project. After creating bot
-h of these, list the files"""
