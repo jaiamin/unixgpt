@@ -22,4 +22,5 @@ setup(
             "unixgpt = unixgpt.__main__:main"
         ]
     },
+    long_description="In initial development."
 )
