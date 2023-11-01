@@ -1,5 +1,8 @@
 # unixgpt
 
+[![PyPI](https://img.shields.io/pypi/v/unixgpt)](https://pypi.org/project/unixgpt/)
+[![Upload Python Package](https://github.com/jamino30/unixgpt/actions/workflows/python-publish.yml/badge.svg)](https://github.com/jamino30/unixgpt/actions/workflows/python-publish.yml)
+
 unixgpt is a powerful bridge between natural language and UNIX commands.
 
 ![image](https://github.com/jamino30/unixgpt/blob/main/assets/demo.gif)
@@ -8,6 +11,12 @@ The latest version of ```unixgpt``` can be installed from PyPI:
 
 ```bash
 pip install unixgpt
+```
+
+To upgrade to the latest version:
+
+```bash
+pip install --upgrade unixgpt
 ```
 
 ## Features
