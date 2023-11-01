@@ -1,5 +1,7 @@
 # unixgpt
 
+[![PyPI](https://img.shields.io/pypi/v/unixgpt)](https://pypi.org/project/unixgpt/)
+
 unixgpt is a powerful bridge between natural language and UNIX commands.
 
 ![image](https://github.com/jamino30/unixgpt/blob/main/assets/demo.gif)
