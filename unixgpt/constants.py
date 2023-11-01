@@ -4,8 +4,6 @@
 #
 # Default values used throughout the entire library.
 
-import os
-
 # Library version
 VERSION: str = "0.1.2"
 

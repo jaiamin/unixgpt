@@ -8,6 +8,6 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
-ENV USER_INPUT=""
+ENV TEST_INPUT="show me my files"
 
-CMD ["python3", "unixgpt/__main__.py", ${USER_INPUT}]
+CMD ["python3", "-m", "unixgpt.__main__", "${TEST_INPUT}"]

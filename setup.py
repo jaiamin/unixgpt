@@ -11,7 +11,6 @@ REQUIREMENTS = [
     "rich==13.6.0",
 ]
 
-
 setup(
     name="unixgpt",
     version=VERSION,
