@@ -22,5 +22,7 @@ setup(
             "unixgpt = unixgpt.__main__:main"
         ]
     },
-    long_description="In initial development."
+    description="unixgpt is a powerful bridge between natural language and UNIX commands",
+    long_description=open("README.md").read(),
+    long_description_content_type="text/markdown",
 )
