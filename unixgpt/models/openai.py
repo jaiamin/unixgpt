@@ -1,7 +1,8 @@
 import openai
 
-from ..constants import OPENAI_API_KEY, DEFAULT_MODEL
+from ..constants import DEFAULT_MODEL
 from ..prompts import DEFAULT_PROMPT
+from ..__main__ import OPENAI_API_KEY
 
 class OpenAIClient:
     def __init__(self):

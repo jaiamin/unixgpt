@@ -1,7 +1,8 @@
+import os
+
 from setuptools import setup, find_packages
 
 from unixgpt.constants import VERSION
-
 
 # dependencies
 with open("requirements.txt") as f:
