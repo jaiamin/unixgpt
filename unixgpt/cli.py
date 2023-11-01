@@ -24,17 +24,17 @@ ACTIONS = {
 console = Console()
 
 
-def cli():
+def cli(OPEN_API_KEY):
     args = parse()
 
     # -i, --input
     input: str = args.input.strip()
     if input:
-        handle_input(input)
+        handle_input(input, OPEN_API_KEY)
 
 
-def handle_input(nl_input: str):
-    openai_client = OpenAIClient()
+def handle_input(nl_input: str, OPEN_API_KEY: str):
+    openai_client = OpenAIClient(OPEN_API_KEY)
 
     console.print("=> Searching... 👨‍💻")
     unix_command = openai_client.fetch_unix_command(

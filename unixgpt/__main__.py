@@ -9,7 +9,7 @@ if not OPENAI_API_KEY:
 
 
 def main():
-    cli()
+    cli(OPENAI_API_KEY)
 
 
 if __name__ == "__main__":

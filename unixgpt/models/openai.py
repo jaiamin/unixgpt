@@ -2,10 +2,9 @@ import openai
 
 from ..constants import DEFAULT_MODEL
 from ..prompts import DEFAULT_PROMPT
-from ..__main__ import OPENAI_API_KEY
 
 class OpenAIClient:
-    def __init__(self):
+    def __init__(self, OPENAI_API_KEY):
         openai.api_key = OPENAI_API_KEY
         
         # model prices as of 10/31/23
