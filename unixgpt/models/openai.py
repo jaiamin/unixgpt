@@ -1,8 +1,14 @@
 import openai
+import os
 
 from ..constants import DEFAULT_MODEL
 from ..prompts import DEFAULT_PROMPT
-from ..__main__ import OPENAI_API_KEY
+
+
+OPENAI_API_KEY: str = os.environ.get("OPENAI_API_KEY", None)
+if not OPENAI_API_KEY:
+    raise ValueError("OPENAI_API_KEY environment variable is required.")
+
 
 class OpenAIClient:
     def __init__(self):
