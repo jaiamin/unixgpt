@@ -14,7 +14,7 @@ UnixGPT is a powerful tool that facilitates the transformation of natural langua
 
 3. Reusability: Once a command is saved, easily access the command from storage with natural language or by ID
 
-## Running locally
+## Running locally (PyPI package coming soon)
 
 - Ensure you have a valid OpenAI API Key (if not, get one here: https://openai.com/blog/openai-api)
 - Add OpenAI API Key as environment variable
