@@ -1,5 +1,7 @@
 # UnixGPT
 
+![image](assets/demo.gif)
+
 UnixGPT is a powerful tool that facilitates the transformation of natural language into UNIX commands, making it a user-friendly bridge between the two.
 
 ## Features
