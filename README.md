@@ -14,19 +14,24 @@ UnixGPT is a powerful tool that facilitates the transformation of natural langua
 
 3. Reusability: Once a command is saved, easily access the command from storage with natural language or by ID
 
-## Running locally with Docker
+## Running locally
 
 - Ensure you have a valid OpenAI API Key (if not, get one here: https://openai.com/blog/openai-api)
-- Build docker image
+- Add OpenAI API Key as environment variable
 
 ```bash
-docker build -t unixgpt .
+export OPENAI_API_KEY=
 ```
 
-- Run docker container with specific configurations (OPENAI_API_KEY, USER_INPUT)
+- Build package (in same directory as setup.py)
 
 ```bash
-docker run -e USER_INPUT="Your custom input" -e OPENAI_API_KEY="Your key here" unixgpt
+pip install .
+```
+
+- Run package with desired natural language input
+```bash
+unixgpt -i "[input here]"
 ```
 
 ## Examples
