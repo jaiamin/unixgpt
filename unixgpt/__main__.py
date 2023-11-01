@@ -1,8 +1,8 @@
-import cli
+from .cli import cli
 
 
 def main():
-    cli.cli()
+    cli()
 
 
 if __name__ == "__main__":

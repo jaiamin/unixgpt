@@ -1,19 +1,16 @@
-from models.openai import OpenAIClient
-from argparser import parse
-
 from rich.console import Console
 from rich.table import Table
 
-from utils import (
+from .argparser import parse
+from .models.openai import OpenAIClient
+from .library import (
+    save_to_library
+)
+from .utils import (
     execute_unix_command, 
     copy_command_to_clipboard
 )
-
-from library import (
-    save_to_library
-)
-
-from prompts import OPENAI_UNIX_COMMAND_PROMPT
+from .prompts import OPENAI_UNIX_COMMAND_PROMPT
 
 
 ACTIONS = {

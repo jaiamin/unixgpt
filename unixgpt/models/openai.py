@@ -1,10 +1,7 @@
 import openai
 
-import sys
-sys.path.append("..")
-
-from constants import OPENAI_API_KEY, DEFAULT_MODEL
-from prompts import DEFAULT_PROMPT
+from ..constants import OPENAI_API_KEY, DEFAULT_MODEL
+from ..prompts import DEFAULT_PROMPT
 
 class OpenAIClient:
     def __init__(self):

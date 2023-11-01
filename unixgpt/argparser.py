@@ -1,6 +1,6 @@
 import argparse
 
-from constants import VERSION
+from .constants import VERSION
 
 
 def parse():
