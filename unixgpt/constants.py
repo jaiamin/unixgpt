@@ -5,7 +5,7 @@
 # Default values used throughout the entire library.
 
 # Library version
-VERSION: str = "0.1.2"
+VERSION: str = "0.1.3"
 
 # Default model for the library
 DEFAULT_MODEL: str = "gpt-3.5-turbo"
