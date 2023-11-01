@@ -1,8 +1,14 @@
-# UnixGPT
+# unixgpt
+
+unixgpt is a powerful bridge between natural language and UNIX commands.
 
 ![image](https://github.com/jamino30/unixgpt/blob/main/assets/demo.gif)
 
-UnixGPT is a powerful tool that facilitates the transformation of natural language into UNIX commands, making it a user-friendly bridge between the two.
+The latest version of ```unixgpt``` can be installed from PyPI:
+
+```bash
+pip install unixgpt
+```
 
 ## Features
 1. Conversion: Effortlessly convert natural language queries into the corresponding UNIX commands.
@@ -13,26 +19,6 @@ UnixGPT is a powerful tool that facilitates the transformation of natural langua
 - Copy: Copy the generated command to the clipboard for easy pasting and use in your terminal.
 
 3. Reusability: Once a command is saved, easily access the command from storage with natural language or by ID
-
-## Running locally (PyPI package coming soon)
-
-- Ensure you have a valid OpenAI API Key (if not, get one here: https://openai.com/blog/openai-api)
-- Add OpenAI API Key as environment variable
-
-```bash
-export OPENAI_API_KEY=
-```
-
-- Build package (in same directory as setup.py)
-
-```bash
-pip install .
-```
-
-- Run package with desired natural language input
-```bash
-unixgpt -i "[input here]"
-```
 
 ## Examples
 
