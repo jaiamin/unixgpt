@@ -25,15 +25,33 @@ To upgrade to the latest version:
 pip install --upgrade unixgpt
 ```
 
+## Running locally (for development purposes)
+
+Build the Docker image
+
+```bash
+docker build -t unixgpt-cli .
+```
+
+Create and run the Docker container (with a valid OpenAI API Key)
+
+```bash
+docker run -e OPENAI_API_KEY unixgpt-cli
+```
+
+**Note:** docker-compose coming soon for hot reloading
+
 ## Features
-1. Conversion: Effortlessly convert natural language queries into the corresponding UNIX commands.
 
-2. Command Options: After generating a command, you have the flexibility to:
-- Execute: Directly execute the generated UNIX command.
-- Save: Store frequently used commands locally for quick and easy access
-- Copy: Copy the generated command to the clipboard for easy pasting and use in your terminal.
+1. **Conversion:** Seamlessly transform natural language queries into their corresponding UNIX commands.
 
-3. Reusability: Once a command is saved, easily access the command from storage with natural language or by ID
+2. **Command Options:** After generating a command, enjoy the following flexibility:
+
+- **Execute:** Execute the generated UNIX command directly.
+- **Save:** Store frequently used commands locally for swift and convenient access.
+- **Copy:** Copy the generated command to the clipboard, simplifying pasting and use in your terminal.
+
+3. **Reusability:** It's not just about storing commands; it's a versatile tool for saving and editing custom commands via natural language, ensuring your workflow remains flexible and efficient.
 
 ## Examples
 
