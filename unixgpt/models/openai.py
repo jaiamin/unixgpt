@@ -59,7 +59,7 @@ class OpenAIClient:
                 ]
             )
         except Exception as e:
-            print(e)
+            print("Error when fetching from OpenAI.")
             
         try:
             result = completion.choices[0].message.content

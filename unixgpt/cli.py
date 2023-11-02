@@ -1,5 +1,6 @@
 from rich.console import Console
 from rich.table import Table
+from rich.prompt import Prompt
 
 from .argparser import parse
 from .models.openai import OpenAIClient
@@ -29,12 +30,12 @@ def cli(OPEN_API_KEY):
 
     # -i, --input
     if args.input:
-        input = args.input.strip()
-        handle_input(input, OPEN_API_KEY)
+        user_input = args.input.strip()
+        handle_input(nl_input=user_input, OPEN_API_KEY=OPEN_API_KEY)
 
 
 def handle_input(nl_input: str, OPEN_API_KEY: str):
-    openai_client = OpenAIClient(OPEN_API_KEY)
+    openai_client = OpenAIClient(OPENAI_API_KEY=OPEN_API_KEY)
 
     console.print("=> Searching... 👨‍💻")
     unix_command = openai_client.fetch_unix_command(
@@ -118,27 +119,27 @@ def handle_known_actions(unix_command: str, nl_input: str):
 
     if not any(act in action_input for act in ACTIONS.values()):
         console.print("=> Enter a valid action. 🤦‍♂️")
-        handle_known_actions(unix_command, nl_input)
+        handle_known_actions(unix_command=unix_command, nl_input=nl_input)
 
     if ACTIONS["abort"] in action_input:
         handle_abort_action()
         return
     if ACTIONS["revise"] in action_input:
-        handle_revise_action(nl_input)
+        handle_revise_action(nl_input=nl_input)
         return
     
     if ACTIONS["copy"] in action_input:
-        handle_copy_action(unix_command)
+        handle_copy_action(unix_command=unix_command)
     if ACTIONS["save"] in action_input:
-        handle_save_action(unix_command, nl_input)
+        handle_save_action(unix_command=unix_command, nl_input=nl_input)
     if ACTIONS["execute"] in action_input:
-        handle_execute_action(unix_command)
+        handle_execute_action(unix_command=unix_command)
 
 
 
 def handle_execute_action(unix_command: str):
     console.print("=> Executing... 👨‍💻")
-    response = execute_unix_command(unix_command)
+    response = execute_unix_command(unix_command=unix_command)
 
     if "success" in response:
         console.print(f"=> {response['success']}")
@@ -148,20 +149,22 @@ def handle_execute_action(unix_command: str):
 
 
 def handle_copy_action(unix_command: str):
-    response = copy_command_to_clipboard(unix_command)
+    response = copy_command_to_clipboard(unix_command=unix_command)
 
     if "success" in response:
-       console.print(f"=> {response['success']}")
+        console.print(f"=> {response['success']}")
     else:
         console.print(f"=> {response['error']}")
 
 
 def handle_save_action(unix_command: str, nl_input: str):
-    save_to_library(nl_input, unix_command)
+    save_to_library(nl_input=nl_input, unix_command=unix_command)
 
 
 def handle_revise_action(nl_input: str):
-    pass
+    revised_input = Prompt.ask("=> Edit input: ", default=nl_input, show_default=True)
+    print(revised_input)
+    
 
 
 def handle_abort_action():
