@@ -25,7 +25,9 @@ To upgrade to the latest version:
 pip install --upgrade unixgpt
 ```
 
-## Building locally via Docker
+## Building Locally
+
+### Docker
 
 Build the Docker image
 
@@ -40,6 +42,15 @@ docker run -e OPENAI_API_KEY unixgpt-cli
 ```
 
 **Note:** docker-compose coming soon for hot reloading
+
+### pip
+
+Build via pip (from source code)
+
+```bash
+pip install .
+```
+
 
 ## Features
 
