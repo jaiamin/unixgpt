@@ -25,7 +25,7 @@ To upgrade to the latest version:
 pip install --upgrade unixgpt
 ```
 
-## Running locally (for development purposes)
+## Building locally via Docker
 
 Build the Docker image
 
