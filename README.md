@@ -41,7 +41,7 @@ Create and run the Docker container (with a valid OpenAI API Key)
 docker run -e OPENAI_API_KEY unixgpt-cli
 ```
 
-**Note:** docker-compose coming soon for hot reloading
+**Note:** Input can be edited in Dockerfile
 
 ### pip
 
@@ -51,6 +51,11 @@ Build via pip (from source code)
 pip install .
 ```
 
+Run via pip
+
+```bash
+unixgpt -i "enter input here"
+```
 
 ## Features
 
