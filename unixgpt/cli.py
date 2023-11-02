@@ -1,6 +1,5 @@
 from rich.console import Console
 from rich.table import Table
-from rich.prompt import Prompt
 
 from .argparser import parse
 from .models.openai import OpenAIClient
@@ -162,8 +161,9 @@ def handle_save_action(unix_command: str, nl_input: str):
 
 
 def handle_revise_action(nl_input: str):
-    revised_input = Prompt.ask("=> Edit input: ", default=nl_input, show_default=True)
-    print(revised_input)
+    # show user original input and let them edit
+    pass
+
     
 
 
