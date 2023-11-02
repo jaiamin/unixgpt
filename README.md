@@ -7,6 +7,12 @@ unixgpt is a powerful bridge between natural language and UNIX commands.
 
 ![https://github.com/jamino30/unixgpt/blob/main/assets/demo.gif](https://github.com/jamino30/unixgpt/blob/main/assets/demo.gif)
 
+A valid OpenAI API Key is required to run unixgpt (you can get one here: https://openai.com/blog/openai-api)
+
+```bash
+export OPENAI_API_KEY="enter key here"
+```
+
 The latest version of ```unixgpt``` can be installed from PyPI:
 
 ```bash
