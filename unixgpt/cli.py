@@ -28,8 +28,8 @@ def cli(OPEN_API_KEY):
     args = parse()
 
     # -i, --input
-    input: str = args.input.strip()
-    if input:
+    if args.input:
+        input = args.input.strip()
         handle_input(input, OPEN_API_KEY)
 
 

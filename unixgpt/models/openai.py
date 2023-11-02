@@ -7,7 +7,7 @@ class OpenAIClient:
     def __init__(self, OPENAI_API_KEY):
         openai.api_key = OPENAI_API_KEY
         
-        # model prices as of 10/31/23
+        # model prices as of 10/23
         self.prices = {
             "gpt-3.5-turbo-4k": [0.0015, 0.002],
             "gpt-3.5-turbo-16k": [0.003, 0.004],

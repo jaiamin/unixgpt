@@ -8,4 +8,5 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
+# CMD ["python3", "-m", "unixgpt.__main__"]
 CMD ["python3", "-m", "unixgpt.__main__", "-i", "'show me my files'"]
