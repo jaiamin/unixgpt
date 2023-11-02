@@ -5,8 +5,6 @@
 
 unixgpt is a powerful bridge between natural language and UNIX commands.
 
-![https://github.com/jamino30/unixgpt/blob/main/assets/demo.gif](https://github.com/jamino30/unixgpt/blob/main/assets/demo.gif)
-
 A valid OpenAI API Key is required to run unixgpt (you can get one here: https://openai.com/blog/openai-api)
 
 ```bash
@@ -72,6 +70,8 @@ unixgpt -i "enter input here"
 ## Examples
 
 ### Conversion
+
+![https://github.com/jamino30/unixgpt/blob/main/assets/demo.gif](https://github.com/jamino30/unixgpt/blob/main/assets/demo.gif)
 
 ```
 Input: unixgpt -i "I want to see any uses of the 'git commit' command in my history"
