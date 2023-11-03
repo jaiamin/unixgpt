@@ -1,0 +1,25 @@
+name: Ruff Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  ruff:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Download Ruff
+      run: |
+        curl -o ruff https://ruff.io/ruff.js
+        chmod +x ruff
+      working-directory: ${{ github.workspace }}
+
+    - name: Run Ruff
+      run: |
+        ./ruff lint
+      working-directory: ${{ github.workspace }}

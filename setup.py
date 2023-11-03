@@ -22,4 +22,10 @@ setup(
     description="unixgpt is a powerful bridge between natural language and UNIX commands",
     long_description=open("README.md", encoding="utf-8").read(),
     long_description_content_type="text/markdown",
+    license="MIT",
+    classifiers=[
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
+    ],
 )
