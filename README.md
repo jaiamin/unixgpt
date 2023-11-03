@@ -4,6 +4,7 @@
 [![image](https://img.shields.io/pypi/l/unixgpt)](https://pypi.python.org/pypi/unixgpt/)
 [![image](https://img.shields.io/pypi/pyversions/unixgpt)](https://pypi.python.org/pypi/unixgpt/)
 [![release](https://github.com/jamino30/unixgpt/actions/workflows/release.yml/badge.svg)](https://github.com/jamino30/unixgpt/actions/workflows/release.yml)
+[![ruff](https://github.com/jamino30/unixgpt/actions/workflows/ruff.yml/badge.svg)](https://github.com/jamino30/unixgpt/actions/workflows/ruff.yml)
 
 unixgpt is a powerful bridge between natural language and UNIX commands.
 
