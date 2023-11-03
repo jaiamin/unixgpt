@@ -38,7 +38,7 @@ def cli(openai_api_key: str):
 
 def handle_input(nl_input: str, openai_api_key: str):
     """handle input"""
-    openai_client = OpenAIClient(OPENAI_API_KEY=openai_api_key)
+    openai_client = OpenAIClient(openai_api_key=openai_api_key)
 
     console.print("=> Searching... 👨‍💻")
     unix_command = openai_client.fetch_unix_command(

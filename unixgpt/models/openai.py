@@ -4,8 +4,10 @@ from ..constants import DEFAULT_MODEL
 from ..prompts import DEFAULT_PROMPT
 
 class OpenAIClient:
-    def __init__(self, OPENAI_API_KEY):
-        openai.api_key = OPENAI_API_KEY
+    """OpenAI Client"""
+
+    def __init__(self, openai_api_key: str):
+        openai.api_key = openai_api_key
         
         # model prices as of 10/23
         self.prices = {
@@ -48,6 +50,10 @@ class OpenAIClient:
             temperature,
             max_tokens,
         ) -> str:
+        """
+        fetch from gpt
+        """
+
         try:
             completion = openai.ChatCompletion.create(
                 model=model,
@@ -58,7 +64,7 @@ class OpenAIClient:
                     {"role": "user", "content": user_input}
                 ]
             )
-        except Exception as e:
+        except openai.InvalidRequestError:
             print("Error when fetching from OpenAI.")
             
         try:
@@ -75,16 +81,15 @@ class OpenAIClient:
             system_prompt: str,
             output: str,
             encoding_name: str = "cl100k_base"
-        ) -> float:
+        ):
         """
         Get total cost of using an OpenAI model for a given request.
         """
 
         try:
             price_per_1k_tokens: list = self.prices[model]
-        except KeyError as e:
-            print("Model does not exist.")
-            return
+        except KeyError:
+            return {"error": "Model does not exist."}
 
         price_per_token_input = price_per_1k_tokens[0] / 1000
         price_per_token_output = price_per_1k_tokens[1] / 1000
