@@ -1,7 +1,9 @@
 # unixgpt
 
-[![PyPI](https://img.shields.io/pypi/v/unixgpt)](https://pypi.org/project/unixgpt/)
-[![Upload Python Package](https://github.com/jamino30/unixgpt/actions/workflows/python-publish.yml/badge.svg)](https://github.com/jamino30/unixgpt/actions/workflows/python-publish.yml)
+[![pypi](https://img.shields.io/pypi/v/unixgpt)](https://pypi.org/project/unixgpt/)
+[![image](https://img.shields.io/pypi/l/unixgpt)](https://pypi.python.org/pypi/unixgpt/)
+[![image](https://img.shields.io/pypi/pyversions/unixgpt)](https://pypi.python.org/pypi/unixgpt/)
+[![release](https://github.com/jamino30/unixgpt/actions/workflows/python-publish.yml/badge.svg)](https://github.com/jamino30/unixgpt/actions/workflows/python-publish.yml)
 
 unixgpt is a powerful bridge between natural language and UNIX commands.
 
