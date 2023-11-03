@@ -4,6 +4,17 @@ from .constants import VERSION
 
 
 def parse():
+    """
+    Parse the following arguments:
+
+    -i/--input      natural language input to be converted to command
+    -l/--list       list commands in unixgpt library
+    -s/--save       save a command to unixgpt library
+    -f/--fetch      fetch a command from unixgpt library
+    -d/--delete     delete a command from unixgpt library
+    --version       unixgpt version
+    """
+
     parser = argparse.ArgumentParser(
         prog="unixgpt",
         description="Bridges the gap between natural language and UNIX commands"
@@ -51,6 +62,6 @@ def parse():
         version=VERSION,
         help="Print version information and quit"
     )
-    
+
     args = parser.parse_args()
     return args

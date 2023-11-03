@@ -1,3 +1,5 @@
+import sys
+
 from rich.console import Console
 from rich.table import Table
 
@@ -24,17 +26,19 @@ ACTIONS = {
 console = Console()
 
 
-def cli(OPEN_API_KEY):
+def cli(openai_api_key: str):
+    """cli"""
     args = parse()
 
     # -i, --input
     if args.input:
         user_input = args.input.strip()
-        handle_input(nl_input=user_input, OPEN_API_KEY=OPEN_API_KEY)
+        handle_input(nl_input=user_input, openai_api_key=openai_api_key)
 
 
-def handle_input(nl_input: str, OPEN_API_KEY: str):
-    openai_client = OpenAIClient(OPENAI_API_KEY=OPEN_API_KEY)
+def handle_input(nl_input: str, openai_api_key: str):
+    """handle input"""
+    openai_client = OpenAIClient(OPENAI_API_KEY=openai_api_key)
 
     console.print("=> Searching... 👨‍💻")
     unix_command = openai_client.fetch_unix_command(
@@ -99,6 +103,8 @@ def handle_input(nl_input: str, OPEN_API_KEY: str):
 
 
 def handle_unknown_actions(nl_input: str):
+    """handle unknown actions"""
+
     action_input = input("=> Choose an action key: ").strip().lower()
     
     if not any(act in action_input for act in ACTIONS.values()):
@@ -114,6 +120,8 @@ def handle_unknown_actions(nl_input: str):
 
 
 def handle_known_actions(unix_command: str, nl_input: str):
+    """handle known actions"""
+
     action_input = input("=> Choose action key(s): ").strip().lower()
 
     if not any(act in action_input for act in ACTIONS.values()):
@@ -137,6 +145,8 @@ def handle_known_actions(unix_command: str, nl_input: str):
 
 
 def handle_execute_action(unix_command: str):
+    """handle execute actions"""
+
     console.print("=> Executing... 👨‍💻")
     response = execute_unix_command(unix_command=unix_command)
 
@@ -148,6 +158,8 @@ def handle_execute_action(unix_command: str):
 
 
 def handle_copy_action(unix_command: str):
+    """handle copy action"""
+
     response = copy_command_to_clipboard(unix_command=unix_command)
 
     if "success" in response:
@@ -157,16 +169,17 @@ def handle_copy_action(unix_command: str):
 
 
 def handle_save_action(unix_command: str, nl_input: str):
+    """handle save action"""
     save_to_library(nl_input=nl_input, unix_command=unix_command)
 
 
 def handle_revise_action(nl_input: str):
+    """handle revise action"""
     # show user original input and let them edit
-    pass
+    return nl_input
 
     
-
-
 def handle_abort_action():
+    """handle abort action"""
     console.print("=> Aborting... 🙍‍♂️")
-    exit(1)
+    sys.exit()
