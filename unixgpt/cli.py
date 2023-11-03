@@ -105,7 +105,11 @@ def handle_input(nl_input: str, openai_api_key: str):
 def handle_unknown_actions(nl_input: str):
     """handle unknown actions"""
 
-    action_input = input("=> Choose an action key: ").strip().lower()
+    try:
+        action_input = input("=> Choose an action key: ").strip().lower()
+    except KeyboardInterrupt:
+        console.print("\n")
+        handle_abort_action()
     
     if not any(act in action_input for act in ACTIONS.values()):
         console.print("=> Enter a valid action. 🤦‍♂️")
@@ -121,8 +125,12 @@ def handle_unknown_actions(nl_input: str):
 
 def handle_known_actions(unix_command: str, nl_input: str):
     """handle known actions"""
-
-    action_input = input("=> Choose action key(s): ").strip().lower()
+    
+    try:
+        action_input = input("=> Choose action key(s): ").strip().lower()
+    except KeyboardInterrupt:
+        console.print("\n")
+        handle_abort_action()
 
     if not any(act in action_input for act in ACTIONS.values()):
         console.print("=> Enter a valid action. 🤦‍♂️")
