@@ -1,5 +1,6 @@
-# unixgpt
+#  🗣️ unixgpt
 
+[![unixgpt](https://img.shields.io/badge/jamino30-unixgpt-<COLOR>?style=flat&color=blue)](https://github.com/jamino30/unixgpt)
 [![pypi](https://img.shields.io/pypi/v/unixgpt)](https://pypi.org/project/unixgpt/)
 [![image](https://img.shields.io/pypi/l/unixgpt)](https://pypi.python.org/pypi/unixgpt/)
 [![image](https://img.shields.io/pypi/pyversions/unixgpt)](https://pypi.python.org/pypi/unixgpt/)
