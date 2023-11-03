@@ -69,18 +69,26 @@ class OpenAIClient:
             
         try:
             result = completion.choices[0].message.content
+            usage = completion.usage
         except KeyError as e:
             print(e)
+
+        total_tokens = usage.total_tokens
+        total_cost = self.get_total_cost_of_tokens_used(
+            model="gpt-3.5-turbo-4k",
+            prompt_tokens=usage.prompt_tokens,
+            completion_tokens=usage.completion_tokens,
+        )
+        print("  => Tokens: " + str(total_tokens))
+        print("  => Cost:   $" + str(total_cost))
 
         return result
     
     def get_total_cost_of_tokens_used(
             self, 
             model,
-            user_query: str, 
-            system_prompt: str,
-            output: str,
-            encoding_name: str = "cl100k_base"
+            prompt_tokens: int, 
+            completion_tokens: int,
         ):
         """
         Get total cost of using an OpenAI model for a given request.
@@ -94,34 +102,8 @@ class OpenAIClient:
         price_per_token_input = price_per_1k_tokens[0] / 1000
         price_per_token_output = price_per_1k_tokens[1] / 1000
 
-        input_content: str = user_query + "\n" + system_prompt
-        num_tokens_input = self.get_num_of_tokens(
-            content=input_content,
-            encoding_name=encoding_name
-        )
-        num_tokens_output = self.get_num_of_tokens(
-            content=output,
-            encoding_name=encoding_name
-        )
-
-        estimated_cost_input = price_per_token_input * num_tokens_input
-        estimated_cost_output = price_per_token_output * num_tokens_output
+        estimated_cost_input = price_per_token_input * prompt_tokens
+        estimated_cost_output = price_per_token_output * completion_tokens
 
         total_cost = estimated_cost_input + estimated_cost_output
-        return round(total_cost, 3)
-
-    def get_num_of_tokens(
-            self,
-            content: str,
-            encoding_name: str = "cl100k_base",
-        ):
-        """
-        Determine the number of tokens in a given string.
-        """
-
-        import tiktoken
-
-        encoding = tiktoken.get_encoding(encoding_name=encoding_name)
-        num_tokens = len(encoding.encode(content))
-
-        return num_tokens
+        return "{:.3f}".format(total_cost)
