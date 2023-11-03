@@ -2,4 +2,4 @@
 
 def save_to_library(nl_input: str, unix_command: str):
     """save to library"""
-    pass
+    return nl_input, unix_command
