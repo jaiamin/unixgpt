@@ -25,23 +25,28 @@ ACTIONS = {
 
 console = Console()
 
+OPENAI_CLIENT: OpenAIClient = None
+
 
 def cli(openai_api_key: str):
-    """cli"""
+    """cli entry point"""
+
     args = parse()
+
+    global OPENAI_CLIENT
+    OPENAI_CLIENT = OpenAIClient(openai_api_key=openai_api_key)
 
     # -i, --input
     if args.input:
         user_input = args.input.strip()
-        handle_input(nl_input=user_input, openai_api_key=openai_api_key)
+        handle_input(nl_input=user_input)
 
 
-def handle_input(nl_input: str, openai_api_key: str):
+def handle_input(nl_input: str):
     """handle input"""
-    openai_client = OpenAIClient(openai_api_key=openai_api_key)
 
     console.print("=> Searching... 👨‍💻")
-    unix_command = openai_client.fetch_unix_command(
+    unix_command = OPENAI_CLIENT.fetch_unix_command(
         user_input=nl_input,
         system_prompt=OPENAI_UNIX_COMMAND_PROMPT,
         model="gpt-3.5-turbo",
@@ -164,11 +169,14 @@ def handle_execute_action(unix_command: str):
         console.print(f"=> {response['error']}")
 
 
+def handle_edit_command_action(unix_command: str):
+    pass
 
-def handle_copy_action(unix_command: str):
+
+def handle_copy_action(input: str):
     """handle copy action"""
 
-    response = copy_command_to_clipboard(unix_command=unix_command)
+    response = copy_command_to_clipboard(unix_command=input)
 
     if "success" in response:
         console.print(f"=> {response['success']}")
@@ -178,16 +186,20 @@ def handle_copy_action(unix_command: str):
 
 def handle_save_action(unix_command: str, nl_input: str):
     """handle save action"""
+
+    ### COMING SOON ###
     save_to_library(nl_input=nl_input, unix_command=unix_command)
 
 
 def handle_revise_action(nl_input: str):
     """handle revise action"""
-    # show user original input and let them edit
-    return nl_input
+
+    new_input = input("=> Enter a revised input: ")
+    handle_input(nl_input=new_input)
 
     
 def handle_abort_action():
     """handle abort action"""
+
     console.print("=> Aborting... 🙍‍♂️")
     sys.exit()

@@ -20,6 +20,9 @@ class OpenAIClient:
             "gpt-4-32k": [0.06, 0.12],
         }
 
+    def set_api_key(self, openai_api_key: str):
+        openai.api_key = openai_api_key
+
     def fetch_unix_command(
             self, 
             user_input: str = "", 
