@@ -29,22 +29,6 @@ pip install --upgrade unixgpt
 
 ## Building Locally
 
-### Docker
-
-Build the Docker image
-
-```bash
-docker build -t unixgpt-cli .
-```
-
-Create and run the Docker container (with a valid OpenAI API Key)
-
-```bash
-docker run -e OPENAI_API_KEY unixgpt-cli
-```
-
-**Note:** Input can be edited in Dockerfile
-
 ### pip
 
 Build via pip (from source code)
