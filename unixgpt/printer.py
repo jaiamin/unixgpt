@@ -10,10 +10,11 @@
 from rich.console import Console
 from rich.table import Table
 
+
 class RichConsole():
     def __init__(self, pre_symbol: str = "=>"):
         self.console = Console()
-        self.tables = dict()
+        self.tables: dict[Table] = dict()
         self.log: str = ""
         
         # Constants
@@ -45,13 +46,18 @@ class RichConsole():
         self.log_message("\n")
 
     
-    def rich_print_emoji(self, alt_name: str):
-        """Print valid emoji to rich console"""
+    def get_emoji(self, alt_name: str):
+        """Get valid emoji"""
         if alt_name not in self.EMOJIS:
             raise ValueError(f"Emoji alt_name '{alt_name}' does not exist.")
         
-        self.console.print(self.EMOJIS[alt_name])
-        self.log_message(self.EMOJIS[alt_name])
+        return self.EMOJIS[alt_name]
+    
+    
+    def get_code_print(self, message: str):
+        """Get message with code styling"""
+        message_wrapped = f"[code] {message} [/code]"
+        self.console.print(message_wrapped)
     
 
     def add_table(self, name: str, columns: list[str], rows: list[list[str]], bold_columns: bool=True):
