@@ -1,18 +1,61 @@
 # ========================================
 # Console print methods using rich.console
 # ========================================
+#
+# TODO: 
+# - Handle rich.console errors
+# - More table styling options for UnixGPT library tables
+#
 
 from rich.console import Console
 from rich.table import Table
 
 class RichConsole():
-    def __init__(self):
+    def __init__(self, pre_symbol: str = "=>"):
         self.console = Console()
         self.tables = dict()
+        self.log: str = ""
+        
+        # Constants
+        self.PRE_SYMBOL: str = pre_symbol
+        self.EMOJIS = {
+            "in-progress": "👨‍💻",
+            "success": "🙆‍♂️",
+            "issue": "🤷‍♂️",
+            "error": "🤦‍♂️"
+        }
+
+
+    def rich_print(self, message: str):
+        """Regular print to rich console"""
+        self.console.print(message)
+        self.log_message(message)
+
     
+    def rich_print_with_pre_symbol(self, message: str):
+        """Print with pre-symbol to rich console"""
+        message_with_pre_symbol = self.PRE_SYMBOL + " " + message
+        self.console.print(message_with_pre_symbol)
+        self.log_message(message_with_pre_symbol)
+
+    
+    def rich_print_newline(self):
+        """Print newline to rich console"""
+        self.console.print("\n")
+        self.log_message("\n")
+
+    
+    def rich_print_emoji(self, alt_name: str):
+        """Print valid emoji to rich console"""
+        if alt_name not in self.EMOJIS:
+            raise ValueError(f"Emoji alt_name '{alt_name}' does not exist.")
+        
+        self.console.print(self.EMOJIS[alt_name])
+        self.log_message(self.EMOJIS[alt_name])
+    
+
     def add_table(self, name: str, columns: list[str], rows: list[list[str]], bold_columns: bool=True):
         """Create and add a unique-named table"""
-
         if not name:
             raise ValueError("The table should have a name in order to be added.")
         if name in self.tables:
@@ -43,10 +86,20 @@ class RichConsole():
 
 
     def print_table(self, name: str):
-        """Print a created table to the console"""
-
+        """Print an existing table to the console"""
         if name not in self.tables:
             raise ValueError("This table name does not exist.")
         
         table = self.tables[name]
         self.console.print(table)
+        self.log_message(table)
+
+    
+    def log_message(self, message: str):
+        """Log a message to UnixGPT log"""
+        self.log += message + "\n"
+
+
+    def get_log(self):
+        """Get UnixGPT message log"""
+        return self.log
