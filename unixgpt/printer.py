@@ -98,7 +98,7 @@ class RichConsole():
         
         table = self.tables[name]
         self.console.print(table)
-        self.log_message(table)
+        self.log_message(str(table))
 
     
     def log_message(self, message: str):

@@ -16,7 +16,7 @@ from .utils import (
     execute_unix_command, 
     copy_command_to_clipboard
 )
-from .prompts import OPENAI_UNIX_COMMAND_PROMPT
+from .prompts import OPENAI_UNIX_COMMAND_PROMPT, OPENAI_REVISE_INSTRUCTIONS_PROMPT
 from .printer import RichConsole
 
 
@@ -32,6 +32,35 @@ console = RichConsole()
 
 OPENAI_CLIENT: OpenAIClient = None
 
+known_actions_table_name = "known-actions"
+known_actions_table_cols = ["Action", "Key", "Combineable", "Description"]
+known_actions_table_rows = [
+    ["Execute", "e", "Yes", "Execute the command"],
+    ["Copy", "c", "Yes", "Copy the command"],
+    ["Save", "s", "Yes", "Save the command"],
+    ["Revise", "r", "No", "Revise the input"],
+    ["Abort", "a", "No", "Abort the program"],
+]
+
+console.add_table(
+    name=known_actions_table_name,
+    columns=known_actions_table_cols,
+    rows=known_actions_table_rows,
+)
+
+unknown_actions_table_name = "unknown-actions"
+unknown_actions_table_cols = ["Action", "Key", "Description"]
+unknown_actions_table_rows = [
+    ["Revise", "r", "Revise the input"],
+    ["Abort", "a", "Abort the program"],
+]
+
+console.add_table(
+    name=unknown_actions_table_name,
+    columns=unknown_actions_table_cols,
+    rows=unknown_actions_table_rows,
+)
+
 
 def cli(openai_api_key: str):
     """CLI entry point"""
@@ -43,17 +72,17 @@ def cli(openai_api_key: str):
     # -i, --input
     if args.input:
         user_input = args.input.strip()
-        handle_input(nl_input=user_input)
+        handle_input(nl_input=user_input, prompt=OPENAI_UNIX_COMMAND_PROMPT)
 
 
-def handle_input(nl_input: str):
+def handle_input(nl_input: str, prompt: str):
     """handle input"""
     in_progress_emoji = console.get_emoji("in-progress")
     console.rich_print_with_pre_symbol(f"Searching... {in_progress_emoji}")
 
     unix_command = OPENAI_CLIENT.fetch_unix_command(
         user_input=nl_input,
-        system_prompt=OPENAI_UNIX_COMMAND_PROMPT,
+        system_prompt=prompt,
         model="gpt-3.5-turbo",
     )
     unix_command = unix_command.strip()
@@ -62,48 +91,21 @@ def handle_input(nl_input: str):
         issue_emoji = console.get_emoji("issue")
         console.rich_print_with_pre_symbol(f"Command not found. {issue_emoji}")
 
-        unknown_actions_table_name = "unknown-actions"
-        unknown_actions_table_cols = ["Action", "Key", "Description"]
-        unknown_actions_table_rows = [
-            ["Revise", "r", "Revise the input"],
-            ["Abort", "a", "Abort the program"],
-        ]
+        console.print_table("unknown-actions")
 
-        console.add_table(
-            name=unknown_actions_table_name,
-            columns=unknown_actions_table_cols,
-            rows=unknown_actions_table_rows,
-        )
-        console.print_table(unknown_actions_table_name)
-
-        handle_unknown_actions(nl_input=nl_input)
+        handle_unknown_actions(unix_command=unix_command, nl_input=nl_input)
 
     else:
         success_emoji = console.get_emoji("success")
         message_with_code_styling = console.get_code_print(unix_command)
         console.rich_print_with_pre_symbol(f"Command found! {success_emoji} {message_with_code_styling}")
 
-        known_actions_table_name = "known-actions"
-        known_actions_table_cols = ["Action", "Key", "Combineable", "Description"]
-        known_actions_table_rows = [
-            ["Execute", "e", "Yes", "Execute the command"],
-            ["Copy", "c", "Yes", "Copy the command"],
-            ["Save", "s", "Yes", "Save the command"]
-            ["Revise", "r", "No", "Revise the input"],
-            ["Abort", "a", "No", "Abort the program"],
-        ]
-
-        console.add_table(
-            name=known_actions_table_name,
-            columns=known_actions_table_cols,
-            rows=known_actions_table_rows,
-        )
-        console.print_table(known_actions_table_name)
+        console.print_table("known-actions")
 
         handle_known_actions(unix_command=unix_command, nl_input=nl_input)
 
 
-def handle_unknown_actions(nl_input: str):
+def handle_unknown_actions(unix_command: str, nl_input: str):
     """handle unknown actions"""
     try:
         action_input = input("=> Choose an action key: ").strip().lower()
@@ -116,12 +118,14 @@ def handle_unknown_actions(nl_input: str):
         console.rich_print_with_pre_symbol(f"Enter a valid action. {error_emoji}")
         handle_unknown_actions(nl_input)
     
-    if ACTIONS["abort"] in action_input:
+    if ACTIONS["abort"] == action_input:
         handle_abort_action()
         return
-    if ACTIONS["revise"] in action_input:
-        handle_revise_action(nl_input)
+    elif ACTIONS["revise"] == action_input:
+        handle_revise_action(unix_command)
         return
+    else:
+        handle_unknown_actions(unix_command, nl_input)
 
 
 def handle_known_actions(unix_command: str, nl_input: str):
@@ -141,7 +145,7 @@ def handle_known_actions(unix_command: str, nl_input: str):
         handle_abort_action()
         return
     if ACTIONS["revise"] in action_input:
-        handle_revise_action(nl_input=nl_input)
+        handle_revise_action(unix_command)
         return
     
     if ACTIONS["copy"] in action_input:
@@ -184,10 +188,11 @@ def handle_save_action(unix_command: str, nl_input: str):
     save_to_library(nl_input=nl_input, unix_command=unix_command)
 
 
-def handle_revise_action(nl_input: str):
+def handle_revise_action(unix_command: str):
     """handle revise action"""
-    new_input = input("=> Enter a revised input: ")
-    handle_input(nl_input=new_input)
+    new_input = input("=> Clarify instructions: ")
+    prompt = OPENAI_REVISE_INSTRUCTIONS_PROMPT.format(unix_command)
+    handle_input(nl_input=new_input, prompt=prompt)
 
     
 def handle_abort_action():

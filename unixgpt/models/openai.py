@@ -82,8 +82,8 @@ class OpenAIClient:
             prompt_tokens=usage.prompt_tokens,
             completion_tokens=usage.completion_tokens,
         )
-        print("  => Tokens: " + str(total_tokens))
-        print("  => Cost:   $" + str(total_cost))
+        print(" - Tokens: " + str(total_tokens))
+        print(" - Cost:   $" + str(total_cost))
 
         return result
     
@@ -109,4 +109,4 @@ class OpenAIClient:
         estimated_cost_output = price_per_token_output * completion_tokens
 
         total_cost = estimated_cost_input + estimated_cost_output
-        return "{:.3f}".format(total_cost)
+        return "{:.5f}".format(total_cost)
