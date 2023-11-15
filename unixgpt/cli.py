@@ -97,8 +97,8 @@ def handle_input(nl_input: str, prompt: str):
 
     else:
         success_emoji = console.get_emoji("success")
-        message_with_code_styling = console.get_code_print(unix_command)
-        console.rich_print_with_pre_symbol(f"Command found! {success_emoji} {message_with_code_styling}")
+        code_wrapped_message = console.get_print_code(unix_command)
+        console.rich_print_with_pre_symbol(f"Command found! {success_emoji} {code_wrapped_message}")
 
         console.print_table("known-actions")
 

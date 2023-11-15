@@ -54,10 +54,10 @@ class RichConsole():
         return self.EMOJIS[alt_name]
     
     
-    def get_code_print(self, message: str):
+    def get_print_code(self, message: str):
         """Get message with code styling"""
         message_wrapped = f"[code] {message} [/code]"
-        self.console.print(message_wrapped)
+        return message_wrapped
     
 
     def add_table(self, name: str, columns: list[str], rows: list[list[str]], bold_columns: bool=True):
